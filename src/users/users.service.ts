@@ -9,4 +9,9 @@ export class UsersService {
   async getUsers(): Promise<User[]> {
     return this.prisma.user.findMany();
   }
+
+  async createUser(data: User): Promise<User> {
+    // need middleware to encrypt password
+    return this.prisma.user.create({ data });
+  }
 }
