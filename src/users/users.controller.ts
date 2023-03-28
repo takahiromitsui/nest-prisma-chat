@@ -21,5 +21,8 @@ export class UsersController {
     return this.usersService.createUser(data);
   }
   // should be authorised later
-  // @Patch()
+  @Patch(':id')
+  updateUser(@Param('id') userId: string, @Body() data: User): Promise<User> {
+    return this.usersService.updateUser(userId, data);
+  }
 }

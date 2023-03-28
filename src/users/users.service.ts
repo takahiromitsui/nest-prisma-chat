@@ -23,5 +23,20 @@ export class UsersService {
     return this.prisma.user.create({ data });
   }
 
-  // async updateUser(name: string)
+  async updateUser(id: string, data: User): Promise<User> {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        id: id,
+      },
+    });
+    if (!user) {
+      throw new NotFoundException(`User with id "${id}" not found`);
+    }
+    return this.prisma.user.update({
+      where: {
+        id: id,
+      },
+      data,
+    });
+  }
 }
