@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { UsersService } from './users.service';
 
@@ -9,9 +9,17 @@ export class UsersController {
   getUsers(): Promise<User[]> {
     return this.usersService.getUsers();
   }
+  // should be authorised later
+  @Get(':id')
+  getUserById(@Param('id') userId: string): Promise<User> {
+    return this.usersService.getUserById(userId);
+  }
+
   @Post()
   createUser(@Body() data: User): Promise<User> {
     // need middleware to encrypt password
     return this.usersService.createUser(data);
   }
+  // should be authorised later
+  // @Patch()
 }

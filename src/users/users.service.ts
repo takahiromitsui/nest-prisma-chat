@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 
@@ -10,8 +10,18 @@ export class UsersService {
     return this.prisma.user.findMany();
   }
 
+  async getUserById(id: string): Promise<User> {
+    return this.prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+    });
+  }
+
   async createUser(data: User): Promise<User> {
     // need middleware to encrypt password
     return this.prisma.user.create({ data });
   }
+
+  // async updateUser(name: string)
 }
