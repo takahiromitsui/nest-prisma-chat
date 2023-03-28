@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { User } from '@prisma/client';
 import { UsersService } from './users.service';
 
@@ -24,5 +32,11 @@ export class UsersController {
   @Patch(':id')
   updateUser(@Param('id') userId: string, @Body() data: User): Promise<User> {
     return this.usersService.updateUser(userId, data);
+  }
+
+  // should be authorised later
+  @Delete(':id')
+  deleteUser(@Param('id') userId: string): Promise<User> {
+    return this.usersService.deleteUser(userId);
   }
 }
