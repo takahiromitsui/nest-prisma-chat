@@ -1,7 +1,6 @@
 import {
   MiddlewareConsumer,
   Module,
-  NestMiddleware,
   NestModule,
   RequestMethod,
 } from '@nestjs/common';
