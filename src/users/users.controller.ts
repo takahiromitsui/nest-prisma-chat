@@ -14,18 +14,17 @@ import { UsersService } from './users.service';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
   @Get()
-  getUsers(): Promise<User[]> {
+  async getUsers(): Promise<User[]> {
     return this.usersService.getUsers();
   }
   // should be authorised later
   @Get(':id')
-  getUserById(@Param('id') userId: string): Promise<User> {
+  async getUserById(@Param('id') userId: string): Promise<User> {
     return this.usersService.getUserById(userId);
   }
 
   @Post()
-  createUser(@Body() data: User): Promise<User> {
-    // need middleware to encrypt password
+  async createUser(@Body() data: User): Promise<User> {
     return this.usersService.createUser(data);
   }
   // should be authorised later
@@ -36,7 +35,7 @@ export class UsersController {
 
   // should be authorised later
   @Delete(':id')
-  deleteUser(@Param('id') userId: string): Promise<User> {
+  async deleteUser(@Param('id') userId: string): Promise<User> {
     return this.usersService.deleteUser(userId);
   }
 }
