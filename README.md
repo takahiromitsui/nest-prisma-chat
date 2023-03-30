@@ -24,6 +24,11 @@ Start the server
   yarn start:dev
 ```
 
+## Database
+
+![chat-app-schema](https://user-images.githubusercontent.com/78789212/228848677-2c90c661-630e-452c-b25d-fab40bc03180.png)
+
+
 
 ## API Reference
 ### Introduction
