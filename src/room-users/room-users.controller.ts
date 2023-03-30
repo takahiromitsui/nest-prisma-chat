@@ -1,8 +1,16 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { RoomUser } from '@prisma/client';
 import { RoomUsersService } from './room-users.service';
 
-@Controller('room-user')
+@Controller('room-users')
 export class RoomUsersController {
   constructor(private readonly roomUsersService: RoomUsersService) {}
 
@@ -16,5 +24,16 @@ export class RoomUsersController {
     return this.roomUsersService.createRoomUser(data);
   }
 
-  // @Patch()
+  @Patch(':id')
+  async updateRoomUser(
+    @Param('id') roomUserId: string,
+    @Body() data: RoomUser,
+  ): Promise<RoomUser> {
+    return this.roomUsersService.updateRoomUser(roomUserId, data);
+  }
+
+  @Delete(':id')
+  async deleteRoomUser(@Param('id') roomUserId: string): Promise<RoomUser> {
+    return this.roomUsersService.deleteRoomUser(roomUserId);
+  }
 }
