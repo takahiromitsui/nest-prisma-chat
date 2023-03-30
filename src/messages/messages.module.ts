@@ -19,10 +19,6 @@ export class MessagesModule implements NestModule {
     consumer.apply(MessageNotFound).forRoutes(
       {
         path: 'messages/:id',
-        method: RequestMethod.GET,
-      },
-      {
-        path: 'messages/:id',
         method: RequestMethod.PATCH,
       },
       {
